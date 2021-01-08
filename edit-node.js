@@ -7,7 +7,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-
 var nodi = [];
 var nodo = {};
 
@@ -57,7 +56,7 @@ app.post("/confirm", function(req, res) {
 })  //end post confirm-all function
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log("Server started.");
+  // console.log("Server started.");
 }); // end listen function
 
 
