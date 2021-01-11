@@ -19,29 +19,27 @@
       <input type="text" name="numNodo" placeholder="numero nodo" value= <%= numNodo %> >
       <button type="submit" name="button">Vai</button>
     </form>
-    <br><br><br>
+
 
 <form class="" action="/new-content" method="post" id="miaForm">
-  <label for="titulo"><h3>Titolo:</h3></label>
-  <input type="text" name="titulo" value= <%= titulo %>>
+  <h3>Titolo: </h3>
+  <input name="titulo" value= "<%= titulo %>" size="80" >
+  <br><br><br>
 
   <h3>Descrizione:</h3>
   <textarea name="descriz" rows="20" cols="80" form="miaForm">
     <%- descr %>
   </textarea>
 
-
 <button class="btn btn-primary btn-lg" type="submit" name="confirm">Conferma</button>
 <button class="btn btn-primary btn-lg" type="submit" name="cancel">Annulla</button>
-
-
 </form>
 
      <script>
        tinymce.init({
          selector: "textarea",
          plugins: 'autolink code lists table hr',
-         toolbar: 'fontsizeselect bold italic underline forecolor backcolor numlist bullist code table hr superscript subscript',
+         toolbar: 'fontsizeselect bold italic underline alignleft aligncenter alignright forecolor backcolor numlist bullist code table hr superscript subscript',
          toolbar_mode: 'floating',
          menubar: 'edit format',
          tinycomments_mode: 'embedded',
