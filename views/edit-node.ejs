@@ -16,40 +16,86 @@
     <h1>Modifica di un nodo</h1>
     <form class="" action="/" method="post">
       <label for="numNodo">Num. nodo:</label>
-      <input type="text" name="numNodo" placeholder="numero nodo" value= <%= numNodo %> >
+      <input type="text" name="numNodo" placeholder="numero nodo" value=<%= numNodo %>>
       <button type="submit" name="button">Vai</button>
     </form>
 
 
-<form class="" action="/new-content" method="post" id="miaForm">
-  <h3>Titolo: </h3>
-  <input name="titulo" value= "<%= titulo %>" size="80" >
-  <br><br><br>
+    <form class="form-group" action="/edit-content" method="post" id="miaForm">
 
-  <h3>Descrizione:</h3>
-  <textarea name="descriz" rows="20" cols="80" form="miaForm">
+      <h3>Titolo: </h3>
+      <input class="form-control" name="titulo" value="<%= titulo %>" size="80">
+      <br><br><br>
+
+      <h3>Descrizione:</h3>
+      <textarea name="descriz" rows="20" cols="80" form="miaForm">
     <%- descr %>
   </textarea>
 
-<button class="btn btn-primary btn-lg" type="submit" name="confirm">Conferma</button>
-<button class="btn btn-primary btn-lg" type="submit" name="cancel">Annulla</button>
-</form>
+      <h3>Domanda:</h3>
+      <input class="form-control" type="text" name="domanda" value="<%= domanda %>" size="60">
+      <hr>
+      <hr>
+      <table class="table">
+        <thead>
+          <td>
+            <h3>Risposta</h3>
+          </td>
+          <td>
+            <h3>Prossimo Nodo</h3>
+          </td>
+        </thead>
 
-     <script>
-       tinymce.init({
-         selector: "textarea",
-         plugins: 'autolink code lists table hr',
-         toolbar: 'fontsizeselect bold italic underline alignleft aligncenter alignright forecolor backcolor numlist bullist code table hr superscript subscript',
-         toolbar_mode: 'floating',
-         menubar: 'edit format',
-         tinycomments_mode: 'embedded',
-         tinycomments_author: 'MM',
+        <tr>
+          <td> <input class="form-control" type="text" name="risp1" value="<%= risp1 %>"> </td>
+          <td> <input class="form-control" type="text" name="nxNodo1" value="<%= nxNodo1 %>"> </td>
+        </tr>
+        <tr>
+          <td> <input class="form-control" type="text" name="risp2" value="<%= risp2 %>"> </td>
+          <td> <input class="form-control" type="text" name="nxNodo2" value="<%= nxNodo2 %>"> </td>
+        </tr>
+        <tr>
+          <td> <input class="form-control" type="text" name="risp3" value="<%= risp3 %>"> </td>
+          <td> <input class="form-control" type="text" name="nxNodo3" value="<%= nxNodo3 %>"> </td>
+        </tr>
+        <tr>
+          <td> <input class="form-control" type="text" name="risp4" value="<%= risp4 %>"> </td>
+          <td> <input class="form-control" type="text" name="nxNodo4" value="<%= nxNodo4 %>"> </td>
+        </tr>
+        <tr>
+          <td> <input class="form-control" type="text" name="risp5" value="<%= risp5 %>"> </td>
+          <td> <input class="form-control" type="text" name="nxNodo5" value="<%= nxNodo5 %>"> </td>
+        </tr>
+        <tr>
+          <td> <input class="form-control" type="text" name="risp6" value="<%= risp6 %>"> </td>
+          <td> <input class="form-control" type="text" name="nxNodo6" value="<%= nxNodo6 %>"> </td>
+        </tr>
+
+      </table>
+
+
+      <button class="btn btn-primary btn-lg" type="submit" name="confirm">Conferma</button>
+      <button class="btn btn-primary btn-lg" type="reset" >Annulla</button>
+    </form>
+
+    <script>
+      tinymce.init({
+        selector: "textarea",
+        plugins: 'autolink code lists table hr',
+        toolbar: 'fontsizeselect bold italic underline alignleft aligncenter alignright forecolor backcolor numlist bullist code table hr superscript subscript',
+        toolbar_mode: 'floating',
+        menubar: 'edit format',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'MM',
       });
-     </script>
+    </script>
 
-<form action="/confirm" method="post">
-  <button class="btn btn-primary btn-lg" type="submit" name="confirmAll">Salva tutte le modifiche</button>
-</form>
+
+
+
+    <form action="/confirm" method="post">
+      <button class="btn btn-primary btn-lg" type="submit" name="confirmAll">Salva tutte le modifiche</button>
+    </form>
 
   </div>
 </body>
