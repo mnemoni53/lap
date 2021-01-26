@@ -9,11 +9,12 @@ app.use(express.static("public"));
 
 var nodi = [];
 var nodo = {};
+var autenticato = false;
 
 readTreeFromJson();
 var contenuto = nodi[0].content;
-var nodoScelto = 1;
 var nodeIndex = 0;
+var nodoScelto = nodi[0].nodeNumber;
 var titolo = nodi[0].title;
 var domanda = nodi[0].question;
 var risp1 = nodi[0].answer1;
@@ -31,8 +32,12 @@ var nxNodo6 = nodi[0].nextNode6;
 
 
 
-app.get("/", function (req, res) {
-  res.render("edit-node", {
+app.get("/edit-node", function (req, res) {
+  if (!autenticato) {
+    res.render("login");
+  }
+  else {
+    res.render("edit-node", {
     numNodo: nodoScelto,
     titulo: titolo,
     descr: contenuto,
@@ -50,6 +55,7 @@ app.get("/", function (req, res) {
     nxNodo5: nxNodo5,
     nxNodo6: nxNodo6
    });
+ }
 })  //end get function
 
 app.post("/", function (req, res) {
@@ -132,6 +138,15 @@ app.post("/confirm", function(req, res) {
   res.redirect("/");
 })  //end post confirm-all function
 
+app.post("/authenticate", function(req, res) {
+  if(req.body.psw === "mantuamegenuit") {
+    autenticato = true;
+  }
+  res.redirect("/");
+})
+
+
+
 app.listen(process.env.PORT || 3000, function () {
   // console.log("Server started.");
 }); // end listen function
@@ -147,4 +162,5 @@ function writeTreeToJson() {
   var data = '{ "LymphTree": ' + JSON.stringify(nodi) + '}';
   fs.copyFileSync(__dirname + "/data.mini.json",__dirname + "/data.mini.old.json");
   fs.writeFileSync(__dirname + '/data.mini.json', data, 'utf8')
+  autenticato = false;  // resetto l'autenticazione
 } // end function readTreeFromJson
