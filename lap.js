@@ -11,6 +11,10 @@ var nodi = [];
 var nodo = {};
 var autenticato = false;
 
+var nodeIndex = 0;
+var notFound = false;
+var history = [];
+
 readTreeFromJson();
 var contenuto = nodi[0].content;
 var nodeIndex = 0;
@@ -30,8 +34,72 @@ var nxNodo4 = nodi[0].nextNode4;
 var nxNodo5 = nodi[0].nextNode5;
 var nxNodo6 = nodi[0].nextNode6;
 
+history.push(nodi[0].nodeNumber);
 
+// NAVIGATION FUNCTIONS
 
+app.get("/", function(req, res) {
+  //  req.sendFile(nodi[20]);
+  res.render("navlap", {
+    nodo: nodi[nodeIndex],
+    notFound: notFound,
+    history: history
+  })
+}) //end get function
+
+app.post("/change-node", function(req, res) {
+  switch (req.body.button) {
+    case "1":
+      nodeIndex = nodi.findIndex(o => o.nodeNumber === nodi[nodeIndex].nextNode1);
+      break;
+    case "2":
+      nodeIndex = nodi.findIndex(o => o.nodeNumber === nodi[nodeIndex].nextNode2);
+      break;
+    case "3":
+      nodeIndex = nodi.findIndex(o => o.nodeNumber === nodi[nodeIndex].nextNode3);
+      break;
+    case "4":
+      nodeIndex = nodi.findIndex(o => o.nodeNumber === nodi[nodeIndex].nextNode4);
+      break;
+    case "5":
+      nodeIndex = nodi.findIndex(o => o.nodeNumber === nodi[nodeIndex].nextNode5);
+      break;
+    case "6":
+      nodeIndex = nodi.findIndex(o => o.nodeNumber === nodi[nodeIndex].nextNode6);
+      break;
+    default:
+      console.log("button unknown");
+
+  }
+  if (nodeIndex == -1) {
+    notFound = true;
+  } else {
+    notFound = false;
+    history.push(nodi[nodeIndex].nodeNumber);
+  };
+  res.redirect("/");
+}) //end post function change-node
+
+app.post("/ctrl-buttons", function(req, res) {
+  switch (req.body.ctrlbutton) {
+    case "back":
+      history.pop();
+      nodeIndex = nodi.findIndex(o => o.nodeNumber === history[history.length-1]);
+      break;
+    case "restart":
+    history = [];
+    history.push(nodi[0].nodeNumber);
+    nodeIndex = 0;
+      break;
+    default:
+      console.log("Ctrl Button not found");
+  }
+  res.redirect("/");
+}) // end post function ctrl-buttons
+
+// *** END NAVIGATION FUNCTIONS ***
+
+// *** EDITING FUNCTIONS ***
 app.get("/edit-node", function (req, res) {
   if (!autenticato) {
     res.render("login");
@@ -58,7 +126,7 @@ app.get("/edit-node", function (req, res) {
  }
 })  //end get function
 
-app.post("/", function (req, res) {
+app.post("/edit-node", function (req, res) {
   nodoScelto = req.body.numNodo
   nodeIndex = nodi.findIndex(o => o.nodeNumber === nodoScelto);
   if (nodeIndex != -1) {
@@ -82,7 +150,7 @@ app.post("/", function (req, res) {
   {
     contenuto = "Nodo non trovato...";
   }
-  res.redirect("/");
+  res.redirect("/edit-node");
 })  //end root post function
 
 app.post("/edit-content", function (req,res) {
@@ -130,25 +198,28 @@ app.post("/edit-content", function (req,res) {
   if (req.body.insert) {  //insert node
   }
 
-  res.redirect("/");
+  res.redirect("/edit-node");
 })  // end post new-content function
 
 app.post("/confirm", function(req, res) {
   writeTreeToJson();
-  res.redirect("/");
+  res.redirect("/edit-node");
 })  //end post confirm-all function
 
 app.post("/authenticate", function(req, res) {
   if(req.body.psw === "mantuamegenuit") {
     autenticato = true;
   }
-  res.redirect("/");
+  res.redirect("/edit-node");
 })
 
+// *** END EDITING FUNCTIONS ***
 
+
+// *** COMMON FUNCTIONS ***
 
 app.listen(process.env.PORT || 3000, function () {
-  // console.log("Server started.");
+  console.log("Server started on port 3000.");
 }); // end listen function
 
 
