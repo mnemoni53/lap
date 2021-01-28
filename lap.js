@@ -18,6 +18,7 @@ var history = [];
 readTreeFromJson();
 var contenuto = nodi[0].content;
 var nodeIndex = 0;
+var nodeIndexEdit = 0;
 var nodoScelto = nodi[0].nodeNumber;
 var titolo = nodi[0].title;
 var domanda = nodi[0].question;
@@ -128,23 +129,23 @@ app.get("/edit-node", function (req, res) {
 
 app.post("/edit-node", function (req, res) {
   nodoScelto = req.body.numNodo
-  nodeIndex = nodi.findIndex(o => o.nodeNumber === nodoScelto);
-  if (nodeIndex != -1) {
-    contenuto = nodi[nodeIndex].content;
-    titolo = nodi[nodeIndex].title;
-    domanda = nodi[nodeIndex].question;
-    risp1 = nodi[nodeIndex].answer1;
-    risp2 = nodi[nodeIndex].answer2;
-    risp3 = nodi[nodeIndex].answer3;
-    risp4 = nodi[nodeIndex].answer4;
-    risp5 = nodi[nodeIndex].answer5;
-    risp6 = nodi[nodeIndex].answer6;
-    nxNodo1 = nodi[nodeIndex].nextNode1;
-    nxNodo2 = nodi[nodeIndex].nextNode2;
-    nxNodo3 = nodi[nodeIndex].nextNode3;
-    nxNodo4 = nodi[nodeIndex].nextNode4;
-    nxNodo5 = nodi[nodeIndex].nextNode5;
-    nxNodo6 = nodi[nodeIndex].nextNode6;
+  nodeIndexEdit = nodi.findIndex(o => o.nodeNumber === nodoScelto);
+  if (nodeIndexEdit != -1) {
+    contenuto = nodi[nodeIndexEdit].content;
+    titolo = nodi[nodeIndexEdit].title;
+    domanda = nodi[nodeIndexEdit].question;
+    risp1 = nodi[nodeIndexEdit].answer1;
+    risp2 = nodi[nodeIndexEdit].answer2;
+    risp3 = nodi[nodeIndexEdit].answer3;
+    risp4 = nodi[nodeIndexEdit].answer4;
+    risp5 = nodi[nodeIndexEdit].answer5;
+    risp6 = nodi[nodeIndexEdit].answer6;
+    nxNodo1 = nodi[nodeIndexEdit].nextNode1;
+    nxNodo2 = nodi[nodeIndexEdit].nextNode2;
+    nxNodo3 = nodi[nodeIndexEdit].nextNode3;
+    nxNodo4 = nodi[nodeIndexEdit].nextNode4;
+    nxNodo5 = nodi[nodeIndexEdit].nextNode5;
+    nxNodo6 = nodi[nodeIndexEdit].nextNode6;
   }
   else
   {
@@ -155,21 +156,21 @@ app.post("/edit-node", function (req, res) {
 
 app.post("/edit-content", function (req,res) {
   if (req.body.confirm != undefined) {
-    nodi[nodeIndex].content = req.body.descriz;
-    nodi[nodeIndex].title = req.body.titulo;
-    nodi[nodeIndex].question = req.body.domanda;
-    nodi[nodeIndex].answer1 = req.body.risp1;
-    nodi[nodeIndex].answer2 = req.body.risp2;
-    nodi[nodeIndex].answer3 = req.body.risp3;
-    nodi[nodeIndex].answer4 = req.body.risp4;
-    nodi[nodeIndex].answer5 = req.body.risp5;
-    nodi[nodeIndex].answer6 = req.body.risp6;
-    nodi[nodeIndex].nextNode1 = req.body.nxNodo1;
-    nodi[nodeIndex].nextNode2 = req.body.nxNodo2;
-    nodi[nodeIndex].nextNode3 = req.body.nxNodo3;
-    nodi[nodeIndex].nextNode4 = req.body.nxNodo4;
-    nodi[nodeIndex].nextNode5 = req.body.nxNodo5;
-    nodi[nodeIndex].nextNode6 = req.body.nxNodo6;
+    nodi[nodeIndexEdit].content = req.body.descriz;
+    nodi[nodeIndexEdit].title = req.body.titulo;
+    nodi[nodeIndexEdit].question = req.body.domanda;
+    nodi[nodeIndexEdit].answer1 = req.body.risp1;
+    nodi[nodeIndexEdit].answer2 = req.body.risp2;
+    nodi[nodeIndexEdit].answer3 = req.body.risp3;
+    nodi[nodeIndexEdit].answer4 = req.body.risp4;
+    nodi[nodeIndexEdit].answer5 = req.body.risp5;
+    nodi[nodeIndexEdit].answer6 = req.body.risp6;
+    nodi[nodeIndexEdit].nextNode1 = req.body.nxNodo1;
+    nodi[nodeIndexEdit].nextNode2 = req.body.nxNodo2;
+    nodi[nodeIndexEdit].nextNode3 = req.body.nxNodo3;
+    nodi[nodeIndexEdit].nextNode4 = req.body.nxNodo4;
+    nodi[nodeIndexEdit].nextNode5 = req.body.nxNodo5;
+    nodi[nodeIndexEdit].nextNode6 = req.body.nxNodo6;
 
     contenuto = req.body.descriz;
     titolo = req.body.titulo;
