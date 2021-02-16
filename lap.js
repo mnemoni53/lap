@@ -92,6 +92,10 @@ app.post("/ctrl-buttons", function(req, res) {
     history.push(nodi[0].nodeNumber);
     nodeIndex = 0;
       break;
+    case "reference":
+    nodeIndex = nodi.findIndex(o => o.nodeNumber === "9045");
+    history.push(9045);
+    break;
     default:
       console.log("Ctrl Button not found");
   }

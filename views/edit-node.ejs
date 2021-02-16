@@ -69,12 +69,14 @@
     <script>
       tinymce.init({
         selector: "textarea",
-        plugins: 'autolink code lists table hr',
-        toolbar: 'fontsizeselect bold italic underline alignleft aligncenter alignright forecolor backcolor numlist bullist code table hr superscript subscript',
+        plugins: 'autolink code lists table hr image imagetools',
+        toolbar: 'fontsizeselect bold italic underline | alignleft aligncenter alignright | forecolor backcolor | numlist bullist | code | table hr | superscript subscript | image',
         toolbar_mode: 'floating',
+        imagetools_cors_hosts: [ 'localhost' ],
         menubar: 'edit format',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'MM',
+        // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
       });
     </script>
 
